@@ -1,4 +1,10 @@
 <?php
+/**
+ * Made as an extra to show the speed differences in certain operations
+ * that achieve the same end result.
+ *
+ * TODO: Get the PHP opcodes generated from the below
+ */
 
 echo "Multiplication\n";
 $t = microtime(true);

@@ -1,4 +1,7 @@
 <?php
+/**
+ * This was taken from some performance comparison..but I can't find it at the moment
+ */
 define("BAILOUT",16);
 define("MAX_ITERATIONS",1000);
 
