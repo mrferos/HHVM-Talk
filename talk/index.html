@@ -4,10 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
-
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<title>HHVM</title>
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -55,6 +52,34 @@
                         <p>HipHop was Facebook's first attempt at developing a faster runtime</p>
                         <img src="http://i.imgur.com/U4dsJnv.png" />
                     </section>
+                    <section>
+                        <h1>Why build a new runtime?</h1>
+                        <p>
+                            Reached performance limitations of the language, were porting significant portions of their code to C-extensions.
+                        </p>
+                    </section>
+                    <section>
+                        <h1>The Pros</h1>
+                        <p>
+                            <ol>
+                                <li>Significantly faster</li>
+                                <li>Used much less resources</li>
+                                <li>Reduced operational cost</li>
+                            </ol>
+                        </p>
+                    </section>
+                    <section>
+                        <h1>The Cons</h1>
+                        <p>
+                        <ol>
+                            <li>Very large binary file produced that has to be distributed</li>
+                            <li>Did not lend itself towards the fast iterative PHP-style development</li>
+                        </ol>
+                        </p>
+                    </section>
+                    <section>
+                        <p>And thus was born HHVM</p>
+                    </section>
                 </section>
                 <section>
                     <section>
@@ -88,7 +113,7 @@
                             Just-in-time compilation is a process by which during a program's execution code is profiled
                             and analyzed to identify hotspots, areas of poor performance, and compile it down to machine code.
                             Well written JIT implementations include optimizing compilers that will perform things like
-                            loop optimizations, strength reduction, etc.
+                            loop optimizations, peephole optimization, etc.
                         </p>
                     </section>
                     <section>
@@ -101,7 +126,6 @@
                             <li>Peeling</li>
                             <li>Unrolling</li>
                             <li>Fusion</li>
-                            <li>Fission</li>
                             <li>etc.. (not going to talk about all of them)</li>
                         </ul>
                     </section>
@@ -113,14 +137,22 @@
                         <h1>Loop Unrolling</h1>
                         <p>When the same operation is being performed on an array and the compiler can duplicate the code X amount of times and reduce the looping operations down by N-loops/X-repetitions</p>
                     </section>
+                    <section>
+                        <h1>Loop Fusion</h1>
+                        <p>Combining multiple loops with the same iteration count</p>
+                    </section>
+                    <section>
+                        <h1>Peephole Optimization</h1>
+                        <p>This is generally done once the machine code has been produced by the compiler and is the act of examining very small blocks of code to see if they can be replaced with cheaper operations</p>
+                    </section>
                 </section>
                 <section>
-                    <h3>Wait! Doesn't PHP run inside of a VM too?</h3>
+                    <h3>What does PHP run on now?</h3>
                     <p>
-                        Yes but it does not include any of JIT-goodness that HHVM does, it's "simply" an interpreter.
+                        The Zend Engine, which is a scripting engine that interprets PHP and executes the generated opcodes.
                     </p>
                     <small>
-                        Not yet at least, a big chunk of PHP7 was getting things ready for JIT
+                        A big chunk of PHP7 was getting things ready for JIT
                     </small>
                 </section>
                 <section>
@@ -285,7 +317,7 @@ echo add(1, 1), "\n";
                         <p>Wait PHP7 does static type hinting too, right?</p>
                     </section>
                     <section>
-                        <h1>It does and it looks like...</h1>
+                        <h1>It does and it looks...</h1>
                     </section>
                     <section>
                         <h1>Like so...</h1>
@@ -296,9 +328,17 @@ function add (int $a, int $b): int {
 
 echo add(1, 1), "\n";
                         </code></pre>
-                        <p>
-                            Static type hinting was the singularly most controversial PHP7 RFC
-                        </p>
+                        <small>
+                            Static type hinting was the singularly most controversial PHP RFC
+                        </small>
+                    </section>
+                    <section>
+                        <h1>2. Collections!</h1>
+                        <p>Collections are purpose-specific element containers with better performance than PHP arrays</p>
+                    </section>
+                    <section>
+                        <h1>3. Lambda Expressions</h1>
+                        <p>They're like anonymous functions in PHP but you don't have to do use() to include variables in scope and there is a nice short hand syntax</p>
                     </section>
                 </section>
 			</div>
