@@ -1,9 +1,7 @@
 <?php
+
 /**
- * Made as an extra to show the speed differences in certain operations
- * that achieve the same end result.
- *
- * TODO: Get the PHP opcodes generated from the below
+ * Bit shifting
  */
 
 echo "Multiplication\n";
@@ -27,5 +25,21 @@ for($i = 0; $i < 100000; ++$i) {
 }
 echo (microtime(true) - $t), "\n\n";
 
+/**
+ * Avoiding load stores
+ */
 
+echo "Load Storing\n";
+$time = microtime(true);
+for ($i = 0; $i < 100000; ++$i) {
+    $a = $i + 5;
+    $e = $a + 2;
+}
+echo (microtime(true) - $t), "\n\n";
 
+echo "Without Load Storing\n";
+$time = microtime(true);
+for ($i = 0; $i < 100000; ++$i) {
+    $e = $i + 5 + 2;
+}
+echo (microtime(true) - $t), "\n\n";

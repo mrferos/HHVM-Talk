@@ -42,11 +42,20 @@
 			<div class="slides">
 				<section>
 					<h1>HHVM</h1>
-					<h3>What is it?</h3>
+					<h3>What it is and how it compares to PHP7</h3>
 					<p>
 						<small>Created by <a href="https://github.com/mrferos">Andres Galindo</a> / <a href="http://twitter.com/mrferos">@mrferos</a></small>
 					</p>
 				</section>
+                <section>
+                    <section>
+                        <h1>HHVM is the evolution of HipHop</h1>
+                    </section>
+                    <section>
+                        <p>HipHop was Facebook's first attempt at developing a faster runtime</p>
+                        <img src="http://i.imgur.com/U4dsJnv.png" />
+                    </section>
+                </section>
                 <section>
                     <section>
                         <h1>It's a Process VM with JIT compilation</h1>
@@ -79,9 +88,30 @@
                             Just-in-time compilation is a process by which during a program's execution code is profiled
                             and analyzed to identify hotspots, areas of poor performance, and compile it down to machine code.
                             Well written JIT implementations include optimizing compilers that will perform things like
-                            loop optimizations (detecting code that doesn't need to live in a loop), peephole optimization
-                            (bit-shifting instead of multiplying - a technique called strength reduction) , etc.
+                            loop optimizations, strength reduction, etc.
                         </p>
+                    </section>
+                    <section>
+                        <p>That was a lot of words, what do they mean?</p>
+                    </section>
+                    <section>
+                        <h1>Loop Optimization</h1>
+                        <p>There's a few ways to optimize a loop, what are they? What do they mean?</p>
+                        <ul>
+                            <li>Peeling</li>
+                            <li>Unrolling</li>
+                            <li>Fusion</li>
+                            <li>Fission</li>
+                            <li>etc.. (not going to talk about all of them)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Loop Peeling</h1>
+                        <p>The act by which operations done first or last in the loop are moved outside of it or entirely removed in favor of cheaper operations</p>
+                    </section>
+                    <section>
+                        <h1>Loop Unrolling</h1>
+                        <p>When the same operation is being performed on an array and the compiler can duplicate the code X amount of times and reduce the looping operations down by N-loops/X-repetitions</p>
                     </section>
                 </section>
                 <section>
