@@ -159,8 +159,70 @@
                     <p>Let's get down to business and see what HHVM looks like</p>
                 </section>
                 <section>
-                    <h1>It's fast!</h1>
-                    <p>How fast is fast?</p>
+                    <section>
+                        <h1>Wait, how do I get it?</h1>
+                    </section>
+                    <section>
+                        <h2>1. Add the repo &amp; install the package</h2>
+                        <pre>
+                            <code data-trim class="hljs bash hljs">
+# installs add-apt-repository
+sudo apt-get install software-properties-common
+
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu trusty main'
+sudo apt-get update
+sudo apt-get install hhvm
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h1>And if you're using a web server...</h1>
+                    </section>
+                    <section>
+                        <h2>2. Set up fastcgi</h2>
+                        <p>Execute the installation script</p>
+                        <pre>
+                            <code data-trim class="hljs bash hljs">
+/usr/share/hhvm/install_fastcgi.sh
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>3. Configure nginx</h2>
+                        <pre>
+                            <code data-trim class="hljs nginx hljs">
+ server {
+    listen 80;
+    server_name mysupercoolawesomeapp.com;
+    root /var/www/awesomesauce
+
+    location @handler {
+        rewrite / /index.php;
+    }
+
+    location ~ .php/ {
+        rewrite ^(.*.php)/ $1 last;
+    }
+
+    location ~ .php$ {
+        if (!-e $request_filename) { rewrite / /index.php last; }
+
+        expires        off;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+                <section>
+                    <h2>OK! Now for code!</h2>
+
+                    <p class="fragment">..And it's fast!</p>
                 </section>
                 <section>
                     <h1>Benchmark class</h1>
@@ -291,14 +353,6 @@ ob_end_flush();
                             </tr>
                             </tbody>
                         </table>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <p>That was nice, but I generally don't try to make pretty art with my scripts</p>
-                    </section>
-                    <section>
-                        <h2>Real world example time!</h2>
                     </section>
                 </section>
                 <section>
